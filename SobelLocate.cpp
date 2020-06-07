@@ -46,7 +46,7 @@ void SobelLocate::locate(Mat src, vector<Mat>& dst_plates)
 	Mat element = getStructuringElement(MORPH_RECT, Size(17, 3)); //经验值，可调
 	Mat close;
 	morphologyEx(shold, close, MORPH_CLOSE, element);
-	imshow("close", close);
+	//imshow("close", close);
 
 	//6.求轮廓
 	vector<vector<Point>> contours;
@@ -61,7 +61,7 @@ void SobelLocate::locate(Mat src, vector<Mat>& dst_plates)
 	for each (vector<Point> points in contours)
 	{
 		rotatedRect = minAreaRect(points); //取最小外接矩形（可旋转/带角度）
-		rectangle(src, rotatedRect.boundingRect(), Scalar(0, 0, 255)); //画红色矩形
+		//rectangle(src, rotatedRect.boundingRect(), Scalar(0, 0, 255)); //画红色矩形
 
 		//7.尺寸判断
 		//初步过滤不符合要求的矩形
@@ -70,17 +70,25 @@ void SobelLocate::locate(Mat src, vector<Mat>& dst_plates)
 		}
 	}
 
-	for each (RotatedRect rect in vec_sobel_rects)
-	{
-		rectangle(src, rect.boundingRect(), Scalar(0, 255, 0)); //画绿色矩形
-	}
+	//for each (RotatedRect rect in vec_sobel_rects)
+	//{
+	//	rectangle(src, rect.boundingRect(), Scalar(0, 255, 0)); //画绿色矩形
+	//}
 
 	//矩形矫正
 	tortuosity(src, vec_sobel_rects, dst_plates);
-	for each (Mat m in dst_plates)
-	{
-		imshow("sobel 候选车牌", m);
-		waitKey();
-	}
-	imshow("取轮廓", src);
+	//for each (Mat m in dst_plates)
+	//{
+	//	/*imshow("sobel 候选车牌", m);
+	//	waitKey();*/
+	//}
+	//imshow("sobel取轮廓", src);
+
+	blur.release();
+	gray.release();
+	sobel_16.release();
+	sobel.release();
+	shold.release();
+	element.release();
+	close.release();
 }

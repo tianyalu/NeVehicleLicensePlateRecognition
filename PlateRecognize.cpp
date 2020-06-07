@@ -1,9 +1,10 @@
-#include "plateRecognize.h"
+#include "PlateRecognize.h"
 
-
-PlateRecognize::PlateRecognize()
+PlateRecognize::PlateRecognize(const char* svm_model)
 {
-	sobelLocate = new SobelLocate();
+	sobelLocate = new  SobelLocate();
+	colorLocate = new  ColorLocate();
+	svmPredict = new  SvmPredict(svm_model);
 }
 
 PlateRecognize::~PlateRecognize()
@@ -12,17 +13,56 @@ PlateRecognize::~PlateRecognize()
 		delete sobelLocate;
 		sobelLocate = 0;
 	}
+	if (colorLocate) {
+		delete colorLocate;
+		colorLocate = 0;
+	}
+	if (svmPredict) {
+		delete svmPredict;
+		svmPredict = 0;
+	}
 }
 
 /**
-* ����ʶ�𣨶�λ+���+ʶ��
+车牌识别（定+检+识）
 */
-String PlateRecognize::plateRecognize(Mat src)
+string PlateRecognize::plateRecognize(Mat src)
 {
-	//1.���ƶ�λ
-	//��λ���������ɸѡ�ĺ�ѡ����������
-	vector<Mat> dst_plates;
-	sobelLocate->locate(src, dst_plates);
+	// 1, 车牌定位
+	//sobel定位结果：初步筛选的候选车牌向量集
+	vector<Mat> sobel_plates;
+	sobelLocate->locate(src, sobel_plates);
+	//颜色定位
+	vector<Mat> color_plates;
+	colorLocate->locate(src, color_plates);
+	//文字定位。。。。
+	//2合1
+	vector<Mat> plates;//2合1的候选车牌集合
 
-	return String("7777777");
+	plates.insert(plates.end(), sobel_plates.begin(), sobel_plates.end());
+	plates.insert(plates.end(), color_plates.begin(), color_plates.end());
+
+	for each (Mat m in sobel_plates)
+	{
+		m.release();
+	}
+	for each (Mat m in color_plates)
+	{
+		m.release();
+	}
+	//char winName[100];
+	//for (int i = 0; i < plates.size(); i++)
+	//{
+	//	sprintf(winName, "%d候选车牌", i);
+	//	imshow(winName, plates[i]);
+	//}
+
+	////筛选，svm测评
+	Mat plate;
+	svmPredict->doPredict(plates, plate);
+
+	//字符识别。。。
+
+
+	return string("66666");
 }
