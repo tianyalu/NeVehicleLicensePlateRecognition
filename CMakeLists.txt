@@ -7,7 +7,7 @@ include_directories("D:/CommonDev/opencv/opencv4.1.2/opencv/build/include")
 
 link_directories("D:/CommonDev/opencv/opencv4.1.2/opencv/build/x64/vc15/lib")
 
-file(GLOB srcs *.cpp)
+file(GLOB srcs *.cpp) 
 
 # 将源代码添加到此项目的可执行文件。
 # add_executable (NeVehicleLicensePlateRecognition "NeVehicleLicensePlateRecognition.cpp" "NeVehicleLicensePlateRecognition.h" "PlateRecognize.cpp" "PlateLocate.cpp" "SobelLocate.cpp")

@@ -39,7 +39,7 @@ void SvmPredict::doPredict(vector<Mat> candi_plates, Mat& final_plate)
 		Mat sample = features.reshape(1, 1);
 		//特征交给svm 测评，返回评分
 		score = svm->predict(sample, noArray(), StatModel::Flags::RAW_OUTPUT);
-		printf("svm 候选车牌 %d , 评分是：%f\n", i, score);
+		//printf("svm 候选车牌 %d , 评分是：%f\n", i, score);
 		if (score < minScore)
 		{
 			minScore = score;
@@ -52,12 +52,9 @@ void SvmPredict::doPredict(vector<Mat> candi_plates, Mat& final_plate)
 	if (index >= 0)
 	{
 		final_plate = candi_plates[index].clone();
-		imshow("svm最终候选车牌", final_plate);
-		waitKey();
+		/*imshow("svm最终候选车牌", final_plate);
+		waitKey();*/
 	}
-
-
-
 }
 
 void SvmPredict::getHogFeatures(HOGDescriptor* hog, Mat src, Mat& dst)

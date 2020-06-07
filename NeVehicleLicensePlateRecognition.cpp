@@ -8,8 +8,12 @@
 int main()
 {
 	//imread(车牌图像文件的路径)
-	Mat src = imread("E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/test1.jpg");
-	PlateRecognize pr("E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/svm.xml");
+	const char* srcPath = "E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/test2.jpg";
+	const char* svmXmlPath = "E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/svm.xml";
+	const char* annXmlPath = "E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/ann.xml";
+	const char* annZhXmlPath = "E:/AndroidWangYiCloud/CPlusWorkspace/NeVehicleLicensePlateRecognition/NeVehicleLicensePlateRecognition/resources/ann_zh.xml";
+	Mat src = imread(srcPath);
+	PlateRecognize pr(svmXmlPath, annXmlPath, annZhXmlPath);
 	string str_plate = pr.plateRecognize(src);
 
 	cout << "车牌：" << str_plate << endl;

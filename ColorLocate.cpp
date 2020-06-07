@@ -13,7 +13,7 @@ ColorLocate::~ColorLocate()
 */
 void ColorLocate::locate(Mat src, vector<Mat>& dst_plates)
 {
-	imshow("src", src);
+	//imshow("src", src);
 	//1. 颜色空间转化为HSV
 	Mat hsv;
 	cvtColor(src, hsv, COLOR_BGR2HSV);
@@ -75,7 +75,7 @@ void ColorLocate::locate(Mat src, vector<Mat>& dst_plates)
 	Mat element = getStructuringElement(MORPH_RECT, Size(17, 3)); //经验值，可调
 	Mat close;
 	morphologyEx(shold, close, MORPH_CLOSE, element);
-	imshow("close", close);
+	//imshow("close", close);
 
 	//求轮廓
 	vector<vector<Point>> contours;
