@@ -4,5 +4,7 @@
 
 车牌检测资料，简书地址：[OpenCV 车牌检测资料](https://www.jianshu.com/p/0381cac6dc30)
 
-`svm_train`目录下的是如何进行车牌识别训练的代码
+`svm_train`目录下的是如何进行车牌识别训练的代码，`resources/svm_train`目录下是车牌识别的训练文件；
+
+`ann_train`目录 下是如何进行字符识别训练的代码，`resources/ann_train`目录下是字符识别的训练文件。
 
