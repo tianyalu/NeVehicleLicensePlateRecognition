@@ -8,7 +8,7 @@
 
 ### 1.1 车牌定位
 
-车牌定位，即定位到车牌在图片中的区域位置。
+车牌定位，即定位到车牌在图片中的位置区域。
 
 本文使用了两种方式：`sobel`定位和颜色定位，最后综合两种方式实现定位。
 
@@ -46,9 +46,9 @@
 将以上两种方式获取的集合综合到新的向量中：
 
 ```c++
-	vector<Mat> plates;//2合1的候选车牌集合
-	plates.insert(plates.end(), sobel_plates.begin(), sobel_plates.end());
-	plates.insert(plates.end(), color_plates.begin(), color_plates.end());
+vector<Mat> plates;//2合1的候选车牌集合
+plates.insert(plates.end(), sobel_plates.begin(), sobel_plates.end());
+plates.insert(plates.end(), color_plates.begin(), color_plates.end());
 ```
 
 ### 1.2 车牌检测
@@ -74,7 +74,7 @@
 
 > 1. 灰度化（对于1.2得到的数据）
 > 2. 二值化
-> 3. 清除铆钉像素（行扫码、看跳变次数）
+> 3. 清除铆钉像素（行扫描、看跳变次数）
 > 4. 求字符轮廓
 > 5. 尺寸判断（初步过滤掉不符合要求的矩形）
 > 6. 排序（轮廓矩形x坐标从左到右）
